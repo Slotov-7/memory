@@ -41,32 +41,25 @@ const checkEndGame = () => {
 
 // reeditar p/ tornar funcional
 const checkCards = () => {
-  const firstIcon = firstCard.getAttribute('data-icon');
-  const secondIcon = secondCard.getAttribute('data-icon');
+  const icons = [firstCard, secondCard].map(card => card.getAttribute("data-icon"));
+  if (icons[0] === icons[1]) {
+    firstCard.firstChild.classList.add("disabled-card");
+    secondCard.firstChild.classList.add("disabled-card");
 
-  if (firstIcon === secondIcon) {
-
-    firstCard.firstChild.classList.add('disabled-card');
-    secondCard.firstChild.classList.add('disabled-card');
-
-    firstCard = '';
-    secondCard = '';
-
+    firstCard = "";
+    secondCard = "";
     checkEndGame();
 
   } else {
     setTimeout(() => {
+      firstCard.classList.remove("reveal-card");
+      secondCard.classList.remove("reveal-card");
 
-      firstCard.classList.remove('reveal-card');
-      secondCard.classList.remove('reveal-card');
-
-      firstCard = '';
-      secondCard = '';
-
+      firstCard = "";
+      secondCard = "";
     }, 500);
   }
-
-}
+};
 
 // reeditar para transformar em funcional!!!!!
 const revealCard = ({ target }) => {
