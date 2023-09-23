@@ -83,7 +83,7 @@ const revealCard = ({ target }) => {
   }
 }
 
-// transformar em funcional!!!!!!!!!!!!
+// função que não fere o paradigma
 const createCard = (icon) => {
 
   const card = createElement('div', 'card');

@@ -29,15 +29,8 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	padding: 200px;
-	padding-left: 45%;
-	line-height: 2;
+	line-height: 1;
 } 
-form{
-	display: grid;
-	align-items: center;
-	width: 200px;
-}
 ol, ul {
 	list-style: none;
 }
