@@ -18,6 +18,7 @@ const icon = [
   'turtle',
 ];
 
+// A função cria um element HTML adjunto de tag e class da CSS.
 const createElement = (tag, className) => {
   const element = document.createElement(tag);
   element.className = className;
@@ -28,8 +29,8 @@ const createElement = (tag, className) => {
 let firstCard = '';
 let secondCard = '';
 
-// Checagem para ver se todas as cartas ja foram descobertas, ou seja quando a quantidade de cartas desabilitadas forem 20
-// aparecer um alerta falando que o jogo terminou
+//  A função serve para verificar qnd o jogo termina. Ela verifica se o número de cartas desativadas é igual a 20 
+// E se verdadeiro exibe-se um alerta.
 const checkEndGame = () => {
   const disabledCards = document.querySelectorAll('.disabled-card');
 
@@ -83,7 +84,9 @@ const revealCard = ({ target }) => {
   }
 }
 
-// função que não fere o paradigma
+// função que não fere o paradigma(mantida)
+// A função serve para criar as cartas com seus respsctivos icons.
+// Também servindo para add um EventListener no elem card, para que quando a carta for selecionada(houver o click) chame a função revealCard
 const createCard = (icon) => {
 
   const card = createElement('div', 'card');
@@ -101,12 +104,9 @@ const createCard = (icon) => {
   return card;
 }
 
-// loadGame serve para criar uma gridView com os cards
 // Na modificação feita em comparação com código original foi alterado o uso de ForEach pelo Map e o Reduce
-// Duplica-se o Icon com o objetivo de ter duas cartas no jogo
-// O sort cria uma lista embaralhada com esses Icons
-// o Map transforma esses Icons em um Card para o jogo
-// O reduce por vez utiliza o card para distribui-lo no grid view
+// Esta função é chamada quando a página é carregada. Ela funciona de forma a criar um array duplicando os icon
+// O sort embaralha o array e então cria e fixa um element(item) de carta para cada icon dessa array
 const loadGame = () => {
   const duplicateIcon = [...icon, ...icon];
 
