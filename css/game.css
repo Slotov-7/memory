@@ -2,6 +2,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
+  background-image: url('../assets/background.jpg');
   background-color: aliceblue;
   background-size: cover;
   min-height: 100vh;
