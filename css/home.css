@@ -31,3 +31,6 @@ input#btn1 , input#btn2 , input#btn3{
   cursor: pointer;
   font-size: 20px;
 }
+p{
+  font-size: 20px ;
+}
