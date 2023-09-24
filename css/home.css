@@ -19,8 +19,15 @@ main {
 }
 
 form{
-  block-size: 75px;
+  block-size: 100px;
 	display: grid;
 	align-items: center;
   width: 200px;
+}
+input#btn1 , input#btn2 , input#btn3{
+  border-style: solid;
+  background-color: #ff8a41;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 20px;
 }
