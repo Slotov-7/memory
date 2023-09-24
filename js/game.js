@@ -74,18 +74,16 @@ const checkEndGame = () => {
 // se não ela vai remover as duas cartas pois elas não são iguais
 // usando tambem a fução checkEndGame para ver se o jogo acabou.
 const checkCards = (firstCard, secondCard) => {
-  const firstIcon = firstCard.getAttribute('data-icon');
-  const secondIcon = secondCard.getAttribute('data-icon');
-
-  if (firstIcon === secondIcon) {
-    firstCard.firstChild.classList.add('disabled-card');
-    secondCard.firstChild.classList.add('disabled-card');
-    checkEndGame(document.querySelectorAll('.disabled-card'));
+  const icons = [firstCard, secondCard].map(card => card.getAttribute("data-icon"));
+  if (icons[0] === icons[1]) {
+    firstCard.firstChild.classList.add("disabled-card");
+    secondCard.firstChild.classList.add("disabled-card");
+    checkEndGame();
     return ['', ''];
   } else {
     setTimeout(() => {
-      firstCard.classList.remove('reveal-card');
-      secondCard.classList.remove('reveal-card');
+      firstCard.classList.remove("reveal-card");
+      secondCard.classList.remove("reveal-card");
     }, 500);
     return ['', ''];
   }
@@ -94,19 +92,19 @@ const checkCards = (firstCard, secondCard) => {
 // essa função serva para virar a carta qnd o jogador clicar
 // e depois chama a função checkcards para verificar se as cartas
 // viradas são iguais. 
-const revealCard = (firstCard, secondCard, event) => {
+const revealCard = (event) => {
   const target = event.target;
-
   if (target.parentNode.className.includes('reveal-card')) {
-    return [firstCard, secondCard];
+    return;
   }
 
   if (firstCard === '') {
     target.parentNode.classList.add('reveal-card');
-    return [target.parentNode, secondCard];
+    firstCard = target.parentNode;
   } else if (secondCard === '') {
     target.parentNode.classList.add('reveal-card');
-    return checkCards(target.parentNode, firstCard);
+    secondCard = target.parentNode;
+    [firstCard, secondCard] = checkCards(firstCard, secondCard);
   }
 }
 
