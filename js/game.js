@@ -64,7 +64,7 @@ let secondCard = '';
 const checkEndGame = () => {
   const disabledCards = document.querySelectorAll('.disabled-card');
 
-  if (disabledCards.length === 20) {
+  if (disabledCards.length === 24) {
     alert(`O jogo terminou!`);
   }
 }

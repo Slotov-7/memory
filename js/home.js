@@ -10,8 +10,4 @@ document.getElementById('btn2').onclick = function() {
 document.getElementById('btn3').onclick = function() {
   window.location = "../pages/theme.html";
 }
-/*document.getElementById('btn3').onclick = function(){
-  window.location = '*seleção de tema*.html';
-}
-*/
 
