@@ -1,9 +1,18 @@
+html[data-theme="animal"] {
+  --background-image: url('../assets/background.jpg');
+  --background-image-card: url('../assets/back.jpg');
+}
+
+html[data-theme="ufs"] {
+  --background-image: url('../assets/background.jpg');
+  --background-image-card: url('../assets/backufs.jpg');
+}
+
 main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-image: url('../assets/background.jpg');
-  background-color: aliceblue;
+  background-image: var(--background-image);
   background-size: cover;
   min-height: 100vh;
   align-items: center;
@@ -11,9 +20,22 @@ main {
   padding: 20px 20px 50px;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: lightsteelblue;
+  font-size: 1.2em;
+  width: 100%;
+  max-width: 800px;
+  padding: 30px;
+  margin: 0 0 30px;
+  border-radius: 5px;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   gap: 15px;
   width: 100%;
   max-width: 1200px;
@@ -35,7 +57,7 @@ main {
   height: 100%;
   position: absolute;
   background-size: cover;
-  background-position: center;
+  background-position: center;  
   border: 5px solid #00b5cc;
   border-radius: 5px;
   transition: all 400ms ease;
@@ -46,7 +68,7 @@ main {
 }
 
 .back {
-  background-image: url('../assets/back.jpg');
+  background-image: var(--background-image-card);
   backface-visibility: hidden;
 }
 

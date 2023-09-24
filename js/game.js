@@ -1,22 +1,52 @@
 // Criação do timer 
 // Funções a serem editadas: 
-// ----- Evitar efeitos colaterais das funções checkCards, revealCard e createCard
+// ----- Evitar efeitos colaterais das funções checkCards, revealCard
+
+
+  const iconAnimals = [
+    'bee',
+    'chameleon',
+    'crab',
+    'hen',
+    'jellyfish',
+    'koala',
+    'penguin',
+    'sea-lion',
+    'snake',
+    'turtle',
+    'cow',
+    'fox',
+  ];
+  
+  const iconUfs = [
+    'bicen',
+    'corredor',
+    'dcomp',
+    'did7',
+    'entredids',
+    'filaresun',
+    'gato',
+    'mapa',
+    'reitoria',
+    'resun',
+    'ufs',
+    'vivencia',
+  ];
+
+// A função serve para acessar o tema atual, e retornar a respectiva lista de icon 
+const getIcons = () => {
+const currentTheme = localStorage.getItem('theme') || 'light';
+  if (currentTheme === 'animal') {
+    return iconAnimals;
+  } else {
+    return iconUfs;
+  }
+}
+
+const icon = getIcons();
 
 
 const grid = document.querySelector('.grid');
-
-const icon = [
-  'bee',
-  'chameleon',
-  'crab',
-  'hen',
-  'jellyfish',
-  'koala',
-  'penguin',
-  'sea-lion',
-  'snake',
-  'turtle',
-];
 
 // A função cria um element HTML adjunto de tag e class da CSS.
 const createElement = (tag, className) => {
@@ -30,7 +60,7 @@ let firstCard = '';
 let secondCard = '';
 
 //  A função serve para verificar qnd o jogo termina. Ela verifica se o número de cartas desativadas é igual a 20 
-// E se verdadeiro exibe-se um alerta.
+// E se verdadeiro exibe um alerta.
 const checkEndGame = () => {
   const disabledCards = document.querySelectorAll('.disabled-card');
 
