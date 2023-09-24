@@ -48,7 +48,6 @@ const icon = getIcons();
 
 const grid = document.querySelector('.grid');
 
-// A função cria um element HTML adjunto de tag e class da CSS.
 const createElement = (tag, className) => {
   const element = document.createElement(tag);
   element.className = className;
@@ -56,11 +55,11 @@ const createElement = (tag, className) => {
 }
 
 // tentar retirar as variaveis
-let firstCard = '';
-let secondCard = '';
+firstCard = '';
+secondCard = '';
 
 //  A função serve para verificar qnd o jogo termina. Ela verifica se o número de cartas desativadas é igual a 20 
-// E se verdadeiro exibe um alerta.
+// E se verdadeiro exibe-se um alerta.
 const checkEndGame = () => {
   const disabledCards = document.querySelectorAll('.disabled-card');
 
@@ -70,53 +69,48 @@ const checkEndGame = () => {
 }
 
 
-// reeditar p/ tornar funcional
-const checkCards = () => {
-  const icons = [firstCard, secondCard].map(card => card.getAttribute("data-icon"));
-  if (icons[0] === icons[1]) {
-    firstCard.firstChild.classList.add("disabled-card");
-    secondCard.firstChild.classList.add("disabled-card");
+// Função q vê se as cartas são iguais ou não, 
+//se as cartas forem iguais ela disabilita as duas cartas
+// se não ela vai remover as duas cartas pois elas não são iguais
+// usando tambem a fução checkEndGame para ver se o jogo acabou.
+const checkCards = (firstCard, secondCard) => {
+  const firstIcon = firstCard.getAttribute('data-icon');
+  const secondIcon = secondCard.getAttribute('data-icon');
 
-    firstCard = "";
-    secondCard = "";
-    checkEndGame();
-
+  if (firstIcon === secondIcon) {
+    firstCard.firstChild.classList.add('disabled-card');
+    secondCard.firstChild.classList.add('disabled-card');
+    checkEndGame(document.querySelectorAll('.disabled-card'));
+    return ['', ''];
   } else {
     setTimeout(() => {
-      firstCard.classList.remove("reveal-card");
-      secondCard.classList.remove("reveal-card");
-
-      firstCard = "";
-      secondCard = "";
+      firstCard.classList.remove('reveal-card');
+      secondCard.classList.remove('reveal-card');
     }, 500);
+    return ['', ''];
   }
-};
+}; 
 
-// reeditar para transformar em funcional!!!!!
-const revealCard = ({ target }) => {
+// essa função serva para virar a carta qnd o jogador clicar
+// e depois chama a função checkcards para verificar se as cartas
+// viradas são iguais. 
+const revealCard = (firstCard, secondCard, event) => {
+  const target = event.target;
 
   if (target.parentNode.className.includes('reveal-card')) {
-    return;
+    return [firstCard, secondCard];
   }
 
   if (firstCard === '') {
-
     target.parentNode.classList.add('reveal-card');
-    firstCard = target.parentNode;
-
+    return [target.parentNode, secondCard];
   } else if (secondCard === '') {
-
     target.parentNode.classList.add('reveal-card');
-    secondCard = target.parentNode;
-
-    checkCards();
-
+    return checkCards(target.parentNode, firstCard);
   }
 }
 
-// função que não fere o paradigma(mantida)
-// A função serve para criar as cartas com seus respsctivos icons.
-// Também servindo para add um EventListener no elem card, para que quando a carta for selecionada(houver o click) chame a função revealCard
+// transformar em funcional!!!!!!!!!!!!
 const createCard = (icon) => {
 
   const card = createElement('div', 'card');
@@ -134,9 +128,12 @@ const createCard = (icon) => {
   return card;
 }
 
+// loadGame serve para criar uma gridView com os cards
 // Na modificação feita em comparação com código original foi alterado o uso de ForEach pelo Map e o Reduce
-// Esta função é chamada quando a página é carregada. Ela funciona de forma a criar um array duplicando os icon
-// O sort embaralha o array e então cria e fixa um element(item) de carta para cada icon dessa array
+// Duplica-se o Icon com o objetivo de ter duas cartas no jogo
+// O sort cria uma lista embaralhada com esses Icons
+// o Map transforma esses Icons em um Card para o jogo
+// O reduce por vez utiliza o card para distribui-lo no grid view
 const loadGame = () => {
   const duplicateIcon = [...icon, ...icon];
 
