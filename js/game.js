@@ -36,7 +36,7 @@ const timer = document.querySelector('.timer')
 
 // A função serve para acessar o tema atual, e retornar a respectiva lista de icon 
 const getIcons = () => {
-const currentTheme = localStorage.getItem('theme') || 'light';
+const currentTheme = localStorage.getItem('theme') || 'animal';
   if (currentTheme === 'animal') {
     return iconAnimals;
   } else {

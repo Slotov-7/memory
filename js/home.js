@@ -20,11 +20,11 @@ document.getElementById('btn2').onclick = function() {
 }
 document.getElementById('btn3').onclick = function() {
   //redirect to theme selection page
-  window.location = "../pages/theme.html";
+  window.location = "/pages/theme.html";
 }
 document.getElementById('play').onclick = function(){
 //redirect to game page
-window.location = "../pages/game.html";
+window.location = "/pages/game.html";
 }
 
 
