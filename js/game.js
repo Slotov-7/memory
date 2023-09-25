@@ -4,35 +4,43 @@
 const spanPlayer = document.querySelector('.player')
 const timer = document.querySelector('.timer')
 
-  const iconAnimals = [
-    'bee',
-    'chameleon',
-    'crab',
-    'hen',
-    'jellyfish',
-    'koala',
-    'penguin',
-    'sea-lion',
-    'snake',
-    'turtle',
-    'cow',
-    'fox',
-  ];
-  
-  const iconUfs = [
-    'bicen',
-    'corredor',
-    'dcomp',
-    'did7',
-    'entredids',
-    'filaresun',
-    'gato',
-    'mapa',
-    'reitoria',
-    'resun',
-    'ufs',
-    'vivencia',
-  ];
+const isMultiplayer = window.location.href.includes('multiplayer');
+const spanPlayer1Score = document.getElementById('P1_Score');
+const spanPlayer2Score = document.getElementById('P2_Score');
+const spanTurn = document.getElementById('turn');
+
+let turn = false;
+let playersScores = [0, 0];
+
+const iconAnimals = [
+  'bee',
+  'chameleon',
+  'crab',
+  'hen',
+  'jellyfish',
+  'koala',
+  'penguin',
+  'sea-lion',
+  'snake',
+  'turtle',
+  'cow',
+  'fox',
+];
+
+const iconUfs = [
+  'bicen',
+  'corredor',
+  'dcomp',
+  'did7',
+  'entredids',
+  'filaresun',
+  'gato',
+  'mapa',
+  'reitoria',
+  'resun',
+  'ufs',
+  'vivencia',
+];
 
 // A função serve para acessar o tema atual, e retornar a respectiva lista de icon 
 const getIcons = () => {
@@ -62,23 +70,52 @@ let secondCard = '';
 // E se verdadeiro exibe-se um alerta.
 const checkEndGame = () => {
   const disabledCards = document.querySelectorAll('.disabled-card');
+  const playersName = [
+    localStorage['player1Name'],
+    localStorage['player2Name'],
+  ];
 
   if (disabledCards.length === 24) {
-    clearInterval(this.loop)
-    alert(`Congratulations, ${spanPlayer.innerHTML}! Your time was ${timer.innerHTML}`);
+    clearInterval(this.loop);
+
+    if (isMultiplayer) {
+      const playersWithScore = playersScores.map((n, i) => ({score: n, index: i})).sort((a, b) => b.score - a.score);
+      const [winner, loser] = playersWithScore.map(player => ({...player, name: playersName[player.index]}));
+      
+      alert(`Congratulations! ${winner.name} won with ${winner.score} points!! Your time was ${timer.innerHTML}`);
+    } else {
+      alert(`Congratulations, ${playersName[0]}! Your time was ${timer.innerHTML}`);
+    }
   }
 }
 
+const updateScores = () => {
+  spanPlayer1Score.innerText = `Player 1 Score: ${playersScores[0]}`;
+  if (isMultiplayer) {
+    spanPlayer2Score.innerText = `Player 2 Score: ${playersScores[1]}`;
+  }
+};
+
+const changeTurn = () => {
+  turn = !turn;
+  spanTurn.innerText = `Turn: ${turn ? 'Player 2' : 'Player 1'}`;
+}
 
 // Função q vê se as cartas são iguais ou não, 
 //se as cartas forem iguais ela disabilita as duas cartas
 // se não ela vai remover as duas cartas pois elas não são iguais
 // usando tambem a fução checkEndGame para ver se o jogo acabou.
 const checkCards = (firstCard, secondCard) => {
+  let player = turn ? 1 : 0;
+  if (isMultiplayer){
+    changeTurn();
+  }
   const icons = [firstCard, secondCard].map(card => card.getAttribute("data-icon"));
   if (icons[0] === icons[1]) {
     firstCard.firstChild.classList.add("disabled-card");
     secondCard.firstChild.classList.add("disabled-card");
+    playersScores[player] += 1;
+    updateScores();
     checkEndGame();
     return ['', ''];
   } else {
@@ -161,7 +198,7 @@ const startTimer = () => {
 
 window.onload = () => {
   document.getElementById('P1_Name').innerText += " " + localStorage['player1Name'];
-  if (window.location.href.includes('multiplayer')) {
+  if (isMultiplayer) {
     document.getElementById('P2_Name').innerText += " " + localStorage['player2Name'];
   }
 
