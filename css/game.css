@@ -24,8 +24,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: lightsteelblue;
-  font-size: 1.2em;
+  background-color: rgba(176, 196, 222, 0.8);
+  font-size: 1.5em;
   width: 100%;
   max-width: 800px;
   padding: 30px;

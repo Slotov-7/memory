@@ -1,7 +1,8 @@
 // Criação do timer 
 // Funções a serem editadas: 
 // ----- Evitar efeitos colaterais das funções checkCards, revealCard
-
+const spanPlayer = document.querySelector('.player')
+const timer = document.querySelector('.timer')
 
   const iconAnimals = [
     'bee',
@@ -63,7 +64,8 @@ const checkEndGame = () => {
   const disabledCards = document.querySelectorAll('.disabled-card');
 
   if (disabledCards.length === 24) {
-    alert(`O jogo terminou!`);
+    clearInterval(this.loop)
+    alert(`Congratulations, ${spanPlayer.innerHTML}! Your time was ${timer.innerHTML}`);
   }
 }
 
@@ -88,7 +90,7 @@ const checkCards = (firstCard, secondCard) => {
   }
 }; 
 
-// essa função serva para virar a carta qnd o jogador clicar
+// essa função serve para virar a carta qnd o jogador clicar
 // e depois chama a função checkcards para verificar se as cartas
 // viradas são iguais. 
 const revealCard = (event) => {
@@ -146,8 +148,19 @@ const loadGame = () => {
   }, grid);
 }
 
+const startTimer = () => {
 
-window.onload = () => loadGame();
+  this.loop = setInterval(()=> {
 
+    const currentTime = Number(timer.innerHTML);
+    timer.innerHTML = currentTime + 1
 
+  }, 1000)
+}
 
+window.onload = () => {
+
+  spanPlayer.innerHTML = localStorage.getItem('player');
+  startTimer();
+  loadGame();
+}
