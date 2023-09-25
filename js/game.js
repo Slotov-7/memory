@@ -42,7 +42,6 @@ const currentTheme = localStorage.getItem('theme') || 'light';
     return iconUfs;
   }
 }
-
 const icon = getIcons();
 
 
@@ -54,9 +53,9 @@ const createElement = (tag, className) => {
   return element;
 }
 
-// tentar retirar as variaveis
-firstCard = '';
-secondCard = '';
+// se retirar as variáveis a função revealCards quebra
+let firstCard = '';
+let secondCard = '';
 
 //  A função serve para verificar qnd o jogo termina. Ela verifica se o número de cartas desativadas é igual a 20 
 // E se verdadeiro exibe-se um alerta.
@@ -108,7 +107,9 @@ const revealCard = (event) => {
   }
 }
 
-// transformar em funcional!!!!!!!!!!!!
+// A função cria uma nova carta com base no icon fornecido. 
+// Ela cria os elements HTML e o event necessário para a carta
+// além de definir um data-icon na carta para armazenar o icon.
 const createCard = (icon) => {
 
   const card = createElement('div', 'card');
