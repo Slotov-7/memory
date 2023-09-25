@@ -19,12 +19,12 @@ main {
 }
 
 form{
-  block-size: 100px;
+  block-size: 125px;
 	display: grid;
 	align-items: center;
   width: 200px;
 }
-input#btn1 , input#btn2 , input#btn3{
+input#btn1 , input#btn2 , input#btn3 , input#play{
   border-style: solid;
   background-color: #ff8a41;
   border-radius: 4px;
@@ -34,3 +34,8 @@ input#btn1 , input#btn2 , input#btn3{
 p{
   font-size: 20px ;
 }
+input#P1_name ,input#P2_name {
+  border-color: black;
+  border-radius: 4px;
+  border-style: solid;
+}  
