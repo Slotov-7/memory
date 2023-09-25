@@ -1,1 +1,29 @@
-/* p/ futuras alterações na page theme */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.credits {
+    width: 50%;
+    padding: 20px;
+}
+
+button {
+    width: 177px;
+    height: 236px;
+    cursor: pointer;
+}
+
+.button-image {
+    width: 177px;
+    height: 236px;
+    cursor: pointer;
+}
