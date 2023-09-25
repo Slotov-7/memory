@@ -160,6 +160,10 @@ const startTimer = () => {
 }
 
 window.onload = () => {
+  document.getElementById('P1_Name').innerText += " " + localStorage['player1Name'];
+  if (window.location.href.includes('multiplayer')) {
+    document.getElementById('P2_Name').innerText += " " + localStorage['player2Name'];
+  }
 
   spanPlayer.innerHTML = localStorage.getItem('player');
   startTimer();
