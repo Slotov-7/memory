@@ -147,7 +147,8 @@ const loadGame = () => {
     return grid;
   }, grid);
 }
-
+//a função serve para contar o tempo, pagando o valor do time definido no 
+// html e somando +1 a cada segundo
 const startTimer = () => {
 
   this.loop = setInterval(()=> {
