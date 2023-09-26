@@ -1,11 +1,11 @@
 html[data-theme="animal"] {
-  --background-image: url('../assets/background.jpg');
-  --background-image-card: url('../assets/back.jpg');
+  --background-image: url('/assets/background.jpg');
+  --background-image-card: url('/assets/back.jpg');
 }
 
 html[data-theme="ufs"] {
-  --background-image: url('../assets/background.jpg');
-  --background-image-card: url('../assets/backufs.jpg');
+  --background-image: url('/assets/backgroundufs.png');
+  --background-image-card: url('/assets/backufs.jpg');
 }
 
 main {
