@@ -2,8 +2,7 @@ let isMultiplayer = false;
 const form = document.getElementById('myform');
 
 document.getElementById('btn1').onclick = function() {
-  //remove hidden from 'P1 insert name' prompt and text, also gives hidden to 'P2 insert name' prompt and text in case
-  //multiplayer option has been choosed before.
+  //remove hidden do prompt P1 , também oculta o prompt P2 caso ele o botão multiplayer tenha sido pressionado antes
   document.getElementById('P1_txt').hidden = false 
   document.getElementById('P1_name').hidden = false
   document.getElementById('P2_txt').hidden = true
@@ -12,7 +11,7 @@ document.getElementById('btn1').onclick = function() {
   isMultiplayer = false;
 }
 document.getElementById('btn2').onclick = function() {
-  //remove hidden from 'P1 and P2 insert name' prompt and text
+  //remove hidden do prompt P1 e P2
   document.getElementById('P1_txt').hidden = false
   document.getElementById('P1_name').hidden = false
   document.getElementById('P2_txt').hidden = false
@@ -21,14 +20,16 @@ document.getElementById('btn2').onclick = function() {
   isMultiplayer = true;
 }
 document.getElementById('btn3').onclick = function() {
-  //redirect to theme selection page
+  //redireciona para a pagina de seleção de tema
   window.location = "/pages/theme.html";
 }
 document.getElementById('play').onclick = function(){
+  //armazena o nome do P1 e P2
   localStorage['player1Name'] = document.getElementById('P1_name').value;
   localStorage['player2Name'] = document.getElementById('P2_name').value;
 
-  //redirect to game page
+  //redireciona para a pagina de jogo multiplyer ou singleplyer a depender do boolean de 'isMultiplayer' definido nas funções
+  //btn1 e btn2
   if (isMultiplayer)
     window.location = "/pages/multiplayer.html";
   else
