@@ -44,7 +44,7 @@ const iconUfs = [
 
 // A função serve para acessar o tema atual, e retornar a respectiva lista de icon 
 const getIcons = () => {
-const currentTheme = localStorage.getItem('theme') || 'animal';
+  const currentTheme = localStorage.getItem('theme') || 'animal';
   if (currentTheme === 'animal') {
     return iconAnimals;
   } else {
@@ -79,9 +79,9 @@ const checkEndGame = () => {
     clearInterval(this.loop);
 
     if (isMultiplayer) {
-      const playersWithScore = playersScores.map((n, i) => ({score: n, index: i})).sort((a, b) => b.score - a.score);
-      const [winner, loser] = playersWithScore.map(player => ({...player, name: playersName[player.index]}));
-      
+      const playersWithScore = playersScores.map((n, i) => ({ score: n, index: i })).sort((a, b) => b.score - a.score);
+      const [winner, loser] = playersWithScore.map(player => ({ ...player, name: playersName[player.index] }));
+
       alert(`Congratulations! ${winner.name} won with ${winner.score} points!! Your time was ${timer.innerHTML}`);
     } else {
       alert(`Congratulations, ${playersName[0]}! Your time was ${timer.innerHTML}`);
@@ -90,15 +90,15 @@ const checkEndGame = () => {
 }
 
 const updateScores = () => {
-  spanPlayer1Score.innerText = `Player 1 Score: ${playersScores[0]}`;
+  spanPlayer1Score.innerText = `Score: ${playersScores[0]}`;
   if (isMultiplayer) {
-    spanPlayer2Score.innerText = `Player 2 Score: ${playersScores[1]}`;
+    spanPlayer2Score.innerText = `Score: ${playersScores[1]}`;
   }
 };
 
 const changeTurn = () => {
   turn = !turn;
-  spanTurn.innerText = `Turn: ${turn ? 'Player 2' : 'Player 1'}`;
+  spanTurn.innerText = `Turn: ${turn ? localStorage['player2Name'] : localStorage['player1Name']}`;
 }
 
 // Função q vê se as cartas são iguais ou não, 
@@ -107,7 +107,7 @@ const changeTurn = () => {
 // usando tambem a fução checkEndGame para ver se o jogo acabou.
 const checkCards = (firstCard, secondCard) => {
   let player = turn ? 1 : 0;
-  if (isMultiplayer){
+  if (isMultiplayer) {
     changeTurn();
   }
   const icons = [firstCard, secondCard].map(card => card.getAttribute("data-icon"));
@@ -125,7 +125,7 @@ const checkCards = (firstCard, secondCard) => {
     }, 500);
     return ['', ''];
   }
-}; 
+};
 
 // essa função serve para virar a carta qnd o jogador clicar
 // e depois chama a função checkcards para verificar se as cartas
@@ -188,7 +188,7 @@ const loadGame = () => {
 // html e somando +1 a cada segundo
 const startTimer = () => {
 
-  this.loop = setInterval(()=> {
+  this.loop = setInterval(() => {
 
     const currentTime = Number(timer.innerHTML);
     timer.innerHTML = currentTime + 1
@@ -199,6 +199,7 @@ const startTimer = () => {
 window.onload = () => {
   document.getElementById('P1_Name').innerText += " " + localStorage['player1Name'];
   if (isMultiplayer) {
+    document.getElementById('turn').innerText += "Turn: " + localStorage['player1Name']
     document.getElementById('P2_Name').innerText += " " + localStorage['player2Name'];
   }
 

@@ -1,11 +1,11 @@
 html[data-theme="animal"] {
-  --background-image: url('../assets/background.jpg');
-  --background-image-card: url('../assets/back.jpg');
+  --background-image: url('/assets/background.jpg');
+  --background-image-card: url('/assets/bganimal.jpg');
 }
 
 html[data-theme="ufs"] {
-  --background-image: url('../assets/background.jpg');
-  --background-image-card: url('../assets/backufs.jpg');
+  --background-image: url('/assets/backgroundufs.png');
+  --background-image-card: url('/assets/bgufs.jpg');
 }
 
 main {
@@ -57,7 +57,7 @@ header {
   height: 100%;
   position: absolute;
   background-size: cover;
-  background-position: center;  
+  background-position: center;
   border: 5px solid #00b5cc;
   border-radius: 5px;
   transition: all 400ms ease;
