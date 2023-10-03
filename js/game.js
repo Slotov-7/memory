@@ -29,20 +29,21 @@ const iconAnimals = [
 
 const iconUfs = [
   'bicen',
-  'corredor',
+  'dcomplogo',
   'dcomp',
   'did7',
-  'entredids',
+  'softeam',
   'filaresun',
   'gato',
   'mapa',
-  'reitoria',
+  'bugados',
   'resun',
   'ufs',
-  'vivencia',
+  'ufscarta',
 ];
 
-// A função serve para acessar o tema atual, e retornar a respectiva lista de icon 
+
+// A função getIcons é utilizada para retornar uma lista de ícones com base no tema escolhido do jogo.
 const getIcons = () => {
   const currentTheme = localStorage.getItem('theme') || 'animal';
   if (currentTheme === 'animal') {
@@ -166,12 +167,13 @@ const createCard = (icon) => {
   return card;
 }
 
-// loadGame serve para criar uma gridView com os cards
-// Na modificação feita em comparação com código original foi alterado o uso de ForEach pelo Map e o Reduce
-// Duplica-se o Icon com o objetivo de ter duas cartas no jogo
-// O sort cria uma lista embaralhada com esses Icons
-// o Map transforma esses Icons em um Card para o jogo
-// O reduce por vez utiliza o card para distribui-lo no grid view
+// A função loadGame é responsável por criar uma gridView com os cards do jogo.
+// Em comparação com o código original, substituímos o uso de forEach por map e reduce.
+// Explicando a função passo a passo:
+// A priori, cada ícone é duplicado com o objetivo de ter duas cartas correspondentes no jogo.
+// Por sua vez, o sort é usado para criar uma lista embaralhada desses ícones.
+// Outrossim, o map é utilizado para transformar os ícones em um objeto card para o jogo.
+// Por fim, o reduce distribui esses objetos 'Card' na gridView.
 const loadGame = () => {
   const duplicateIcon = [...icon, ...icon];
 
@@ -196,14 +198,14 @@ const startTimer = () => {
   }, 1000)
 }
 
-window.onload = () => {
-  document.getElementById('P1_Name').innerText += " " + localStorage['player1Name'];
-  if (isMultiplayer) {
-    document.getElementById('turn').innerText += "Turn: " + localStorage['player1Name']
-    document.getElementById('P2_Name').innerText += " " + localStorage['player2Name'];
-  }
+  window.onload = () => {
+    document.getElementById('P1_Name').innerText += " " + localStorage['player1Name'];
+    if (isMultiplayer) {
+      document.getElementById('turn').innerText += "Turn: " + localStorage['player1Name']
+      document.getElementById('P2_Name').innerText += " " + localStorage['player2Name'];
+    }
 
-  spanPlayer.innerHTML = localStorage.getItem('player');
-  startTimer();
-  loadGame();
-}
+    spanPlayer.innerHTML = localStorage.getItem('player');
+    startTimer();
+    loadGame();
+  }
