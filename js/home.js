@@ -1,8 +1,10 @@
 let isMultiplayer = false;
 const form = document.getElementById('myform');
 
-document.getElementById('btn1').onclick = function () {
-  //remove hidden do prompt P1 , também oculta o prompt P2 caso ele o botão multiplayer tenha sido pressionado antes
+
+document.getElementById('btn1').onclick = function() {
+  //remove a ocultação do texto e input do player 1, esconde novamente o texto e input do player 2 caso a opção multiplayer tenha sido
+  //selecionada anteriormente, atribui 'false' ao isMultiplayer para definir o jogo como singleplayer
   document.getElementById('P1_txt').hidden = false
   document.getElementById('P1_name').hidden = false
   document.getElementById('P2_txt').hidden = true
@@ -10,8 +12,8 @@ document.getElementById('btn1').onclick = function () {
   document.getElementById('play').hidden = false
   isMultiplayer = false;
 }
-document.getElementById('btn2').onclick = function () {
-  //remove hidden do prompt P1 e P2
+document.getElementById('btn2').onclick = function() {
+  //remove a ocultação do texto e input do player 1 e 2, atribui 'true' ao isMultiplayer para definir o jogo como multiplayer
   document.getElementById('P1_txt').hidden = false
   document.getElementById('P1_name').hidden = false
   document.getElementById('P2_txt').hidden = false
