@@ -101,7 +101,7 @@ const changeTurn = () => {
   spanTurn.innerText = `Turn: ${turn ? localStorage['player2Name'] : localStorage['player1Name']}`;
 }
 
-// Função q vê se as cartas são iguais ou não, 
+// Função que vê se as cartas são iguais ou não, 
 //se as cartas forem iguais ela disabilita as duas cartas
 // se não ela vai remover as duas cartas pois elas não são iguais
 // usando tambem a fução checkEndGame para ver se o jogo acabou.
