@@ -1,5 +1,4 @@
 let isMultiplayer = false;
-let Name = false;
 const form = document.getElementById('myform');
 
 document.getElementById('btn1').onclick = function() {
@@ -10,6 +9,8 @@ document.getElementById('btn1').onclick = function() {
   document.getElementById('P2_txt').hidden = true
   document.getElementById('P2_name').hidden = true
   document.getElementById('play').hidden = false
+  document.getElementById('myform').style.blockSize = '250px'
+  document.getElementById('invalid_name').hidden = true
   isMultiplayer = false;
 }
 document.getElementById('btn2').onclick = function() {
@@ -19,6 +20,8 @@ document.getElementById('btn2').onclick = function() {
   document.getElementById('P2_txt').hidden = false
   document.getElementById('P2_name').hidden = false
   document.getElementById('play').hidden = false
+  document.getElementById('myform').style.blockSize = '300px'
+  document.getElementById('invalid_name').hidden = true   
   isMultiplayer = true;
 }
 document.getElementById('btn3').onclick = function () {
@@ -32,21 +35,20 @@ document.getElementById('play').onclick = function () {
 
   //verifica os seguintes casos: jogo multiplayer e ambos os nomes válidos(menor do que 3 caracteres), jogo singleplayer e o nome do P1
   //válido. Caso algum dos dois seja verdadeiro 'Name' recebe o valor de 'true'.
-  if (isMultiplayer && (document.getElementById('P1_name').value.length >3 && document.getElementById('P2_name').value.length >3)){
-    Name = true
-  } else if (!isMultiplayer && document.getElementById('P1_name').value.length){
-    Name = true
-  }
+  if (isMultiplayer && (document.getElementById('P1_name').value.length <3 || document.getElementById('P2_name').value.length <3)){
+    document.getElementById('invalid_name').hidden = false
+  } else if (!isMultiplayer && document.getElementById('P1_name').value.length <3){
+    document.getElementById('invalid_name').hidden = false
+  } else 
+  document.getElementById('invalid_name').hidden =  true
   
   //redireciona para a pagina de jogo multiplyer ou singleplyer a depender do boolean de 'isMultiplayer' definido nas funções
   //btn1 e btn2,  determina se o nome é válido apartir do boolean de 'Name', se for false,
   // o jogador receberá um aviso e o jogo não irá iniciar.
-  if (isMultiplayer && Name)
+  if (isMultiplayer && document.getElementById('invalid_name').hidden)
     window.location = "/pages/multiplayer.html";
-  else if (!isMultiplayer && Name)
-    window.location = "/pages/game.html";
-  else 
-  window.alert('please insert a valid name')
+  else if (!isMultiplayer && document.getElementById('invalid_name').hidden)
+    window.location = "pages/game.html";
 }
 
 
