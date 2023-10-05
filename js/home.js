@@ -48,7 +48,7 @@ document.getElementById('play').onclick = function () {
   if (isMultiplayer && document.getElementById('invalid_name').hidden)
     window.location = "/pages/multiplayer.html";
   else if (!isMultiplayer && document.getElementById('invalid_name').hidden)
-    window.location = "pages/game.html";
+    window.location = "/pages/game.html";
 }
 
 
