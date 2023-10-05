@@ -1,6 +1,3 @@
-// Criação do timer 
-// Funções a serem editadas: 
-// ----- Evitar efeitos colaterais das funções checkCards, revealCard
 const spanPlayer = document.querySelector('.player')
 const timer = document.querySelector('.timer')
 
@@ -29,20 +26,21 @@ const iconAnimals = [
 
 const iconUfs = [
   'bicen',
-  'corredor',
+  'dcomplogo',
   'dcomp',
   'did7',
-  'entredids',
+  'softeam',
   'filaresun',
   'gato',
   'mapa',
-  'reitoria',
+  'bugados',
   'resun',
   'ufs',
-  'vivencia',
+  'ufscarta',
 ];
 
-// A função serve para acessar o tema atual, e retornar a respectiva lista de icon 
+
+// A função getIcons é utilizada para retornar uma lista de ícones com base no tema escolhido do jogo.
 const getIcons = () => {
   const currentTheme = localStorage.getItem('theme') || 'animal';
   if (currentTheme === 'animal') {
@@ -56,18 +54,17 @@ const icon = getIcons();
 
 const grid = document.querySelector('.grid');
 
+// Função para criar um elemento HTML com uma classe CSS
 const createElement = (tag, className) => {
   const element = document.createElement(tag);
   element.className = className;
   return element;
 }
 
-// se retirar as variáveis a função revealCards quebra
 let firstCard = '';
 let secondCard = '';
 
-//  A função serve para verificar qnd o jogo termina. Ela verifica se o número de cartas desativadas é igual a 20 
-// E se verdadeiro exibe-se um alerta.
+// Função para verificar se o jogo terminou. Se todas as cartas estiverem desativadas, o jogo termina.
 const checkEndGame = () => {
   const disabledCards = document.querySelectorAll('.disabled-card');
   const playersName = [
@@ -82,13 +79,18 @@ const checkEndGame = () => {
       const playersWithScore = playersScores.map((n, i) => ({ score: n, index: i })).sort((a, b) => b.score - a.score);
       const [winner, loser] = playersWithScore.map(player => ({ ...player, name: playersName[player.index] }));
 
-      alert(`Congratulations! ${winner.name} won with ${winner.score} points!! Your time was ${timer.innerHTML}`);
+      if (winner.score === loser.score) {
+        alert(`It's a tie! Both ${winner.name} and ${loser.name} scored ${winner.score} points!!`);
+      } else {
+        alert(`Congratulations! ${winner.name} won with ${winner.score} points!! Your time was ${timer.innerHTML}`);
+      }
     } else {
-      alert(`Congratulations, ${playersName[0]}! Your time was ${timer.innerHTML}`);
+      alert(`Congratulations, ${playersName[0]}! Your time was ${timer.innerHTML}s`);
     }
   }
 }
 
+// Função para atualizar as pontuações dos jogadores
 const updateScores = () => {
   spanPlayer1Score.innerText = `Score: ${playersScores[0]}`;
   if (isMultiplayer) {
@@ -96,15 +98,21 @@ const updateScores = () => {
   }
 };
 
+// Função para alterar o turno do jogador
 const changeTurn = () => {
   turn = !turn;
   spanTurn.innerText = `Turn: ${turn ? localStorage['player2Name'] : localStorage['player1Name']}`;
 }
 
+<<<<<<< HEAD
 // Função que vê se as cartas são iguais ou não, 
 //se as cartas forem iguais ela disabilita as duas cartas
 // se não ela vai remover as duas cartas pois elas não são iguais
 // usando tambem a fução checkEndGame para ver se o jogo acabou.
+=======
+// Função para verificar se duas cartas são iguais.
+// Se forem iguais, as cartas são desativadas. Se não forem iguais, as cartas são viradas novamente.
+>>>>>>> 7125a1a61240ba6b2b62f660810ed4ecb7fe06f6
 const checkCards = (firstCard, secondCard) => {
   let player = turn ? 1 : 0;
   if (isMultiplayer) {
@@ -127,9 +135,7 @@ const checkCards = (firstCard, secondCard) => {
   }
 };
 
-// essa função serve para virar a carta qnd o jogador clicar
-// e depois chama a função checkcards para verificar se as cartas
-// viradas são iguais. 
+// Função para revelar uma carta quando o houver um click nela
 const revealCard = (event) => {
   const target = event.target;
   if (target.parentNode.className.includes('reveal-card')) {
@@ -146,9 +152,7 @@ const revealCard = (event) => {
   }
 }
 
-// A função cria uma nova carta com base no icon fornecido. 
-// Ela cria os elements HTML e o event necessário para a carta
-// além de definir um data-icon na carta para armazenar o icon.
+// Função para criar uma nova carta com base no ícone fornecido
 const createCard = (icon) => {
 
   const card = createElement('div', 'card');
@@ -166,12 +170,7 @@ const createCard = (icon) => {
   return card;
 }
 
-// loadGame serve para criar uma gridView com os cards
-// Na modificação feita em comparação com código original foi alterado o uso de ForEach pelo Map e o Reduce
-// Duplica-se o Icon com o objetivo de ter duas cartas no jogo
-// O sort cria uma lista embaralhada com esses Icons
-// o Map transforma esses Icons em um Card para o jogo
-// O reduce por vez utiliza o card para distribui-lo no grid view
+// A função loadGame é responsável por criar uma gridView com os cards do jogo.
 const loadGame = () => {
   const duplicateIcon = [...icon, ...icon];
 
@@ -184,8 +183,8 @@ const loadGame = () => {
     return grid;
   }, grid);
 }
-//a função serve para contar o tempo, pagando o valor do time definido no 
-// html e somando +1 a cada segundo
+
+// A função serve para iniciar o contador de tempo.
 const startTimer = () => {
 
   this.loop = setInterval(() => {
@@ -196,6 +195,8 @@ const startTimer = () => {
   }, 1000)
 }
 
+// A função window.onload é acionada quando a página HTML é totalmente carregada.
+// Aqui, ela é usada para iniciar o jogo de memória, configurar os nomes dos jogadores e iniciar o cronômetro.
 window.onload = () => {
   document.getElementById('P1_Name').innerText += " " + localStorage['player1Name'];
   if (isMultiplayer) {
@@ -204,6 +205,6 @@ window.onload = () => {
   }
 
   spanPlayer.innerHTML = localStorage.getItem('player');
-  startTimer();
-  loadGame();
+  setTimeout(function () { startTimer(); }, 500),
+    loadGame();
 }
