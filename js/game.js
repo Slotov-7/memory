@@ -195,6 +195,9 @@ window.onload = () => {
   if (isMultiplayer) {
     document.getElementById('turn').innerText += "Turn: " + localStorage['player1Name']
     document.getElementById('P2_Name').innerText += " " + localStorage['player2Name'];
+
+    // 50% de chances de ser a vez de cada jogador
+    turn = (Math.random() < 0.5);
   }
 
   spanPlayer.innerHTML = localStorage.getItem('player');
