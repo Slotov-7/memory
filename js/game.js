@@ -104,28 +104,46 @@ const changeTurn = () => {
   spanTurn.innerText = `Turn: ${turn ? localStorage['player2Name'] : localStorage['player1Name']}`;
 }
 
-// Função para verificar se duas cartas são iguais.
-// Se forem iguais, as cartas são desativadas. Se não forem iguais, as cartas são viradas novamente.
+// Função para verificar se duas cartas são iguais
 const checkCards = (firstCard, secondCard) => {
   let player = turn ? 1 : 0;
   if (isMultiplayer) {
-    changeTurn();
-  }
-  const icons = [firstCard, secondCard].map(card => card.getAttribute("data-icon"));
-  if (icons[0] === icons[1]) {
-    firstCard.firstChild.classList.add("disabled-card");
-    secondCard.firstChild.classList.add("disabled-card");
-    playersScores[player] += 1;
-    updateScores();
-    checkEndGame();
+    changeTurn();}
+  // Função para verificar se os ícones das duas cartas são iguais
+  const icons = (firstCard, secondCard) =>
+    firstCard.getAttribute("data-icon") === secondCard.getAttribute("data-icon");
+  // Função para desabilitar uma carta (adiciona uma classe "disabled-card")
+  const disableCard = (card) => card.classList.add("disabled-card");
+
+    // Função para ocultar uma carta (remove a classe "reveal-card")
+  const hideCard = (card) => card.classList.remove("reveal-card");
+
+ // Função para lidar com o resultado da comparação das cartas
+  const handleResult = (result, cards) => {
+    if (result) {
+      // Se as cartas forem iguais, desabilite as cartas e chame a função "checkEndGame"
+      cards.map(disableCard);
+      playersScores[player]+=1;
+      updateScores()
+      checkEndGame(); // Chama a função de final do jogo
+    } else {
+      // Se as cartas não forem iguais, oculte as cartas após um atraso de 500ms
+      setTimeout(() => {
+        cards.map(hideCard);
+      }, 500);
+    }
+    // Retorna um array vazio ['','']
     return ['', ''];
-  } else {
-    setTimeout(() => {
-      firstCard.classList.remove("reveal-card");
-      secondCard.classList.remove("reveal-card");
-    }, 500);
-    return ['', ''];
-  }
+  };
+
+ // Verifica se os ícones das duas cartas são iguais
+if (icons(firstCard, secondCard)) {
+  // Se forem iguais, chama a função "handleResult" com "true" e as duas cartas
+  return handleResult(true, [firstCard.firstChild, secondCard.firstChild]);
+} else {
+  // Se não forem iguais, chama a função "handleResult" com "false" e as duas cartas
+  return handleResult(false, [firstCard, secondCard]);
+}
 };
 
 // Função para revelar uma carta quando o houver um click nela
