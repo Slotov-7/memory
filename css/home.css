@@ -24,7 +24,7 @@ form{
 	align-items: center;
   width: 200px;
 }
-input#btn1 , input#btn2 , input#btn3 , input#play{
+input#btn1 , input#btn2 , input#btn3 , input#play, input#chMode{
   border-style: solid;
   background-color: #ff8a41;
   border-radius: 4px;

@@ -1,4 +1,5 @@
 let isMultiplayer = false;
+window.localStorage.setItem('isChallenge', false);
 const form = document.getElementById('myform');
 
 document.getElementById('btn1').onclick = function () {
@@ -11,6 +12,7 @@ document.getElementById('btn1').onclick = function () {
   document.getElementById('play').hidden = false
   document.getElementById('myform').style.blockSize = '250px'
   document.getElementById('invalid_name').hidden = true
+  document.getElementById('chMode').hidden = false
   isMultiplayer = false;
 }
 document.getElementById('btn2').onclick = function () {
@@ -22,6 +24,7 @@ document.getElementById('btn2').onclick = function () {
   document.getElementById('play').hidden = false
   document.getElementById('myform').style.blockSize = '300px'
   document.getElementById('invalid_name').hidden = true
+  document.getElementById('chMode').hidden = true
   isMultiplayer = true;
 }
 document.getElementById('btn3').onclick = function () {
@@ -29,6 +32,15 @@ document.getElementById('btn3').onclick = function () {
   window.location = "/pages/theme.html";
 }
 document.getElementById('play').onclick = function () {
+  onTap();
+}
+
+document.getElementById('chMode').onclick = function () {
+ window.localStorage.setItem('isChallenge', true);
+ onTap();
+}
+
+function onTap() {
   //armazena o nome do P1 e P2
   localStorage['player1Name'] = document.getElementById('P1_name').value;
   localStorage['player2Name'] = document.getElementById('P2_name').value;

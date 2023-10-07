@@ -5,6 +5,7 @@ const isMultiplayer = window.location.href.includes('multiplayer');
 const spanPlayer1Score = document.getElementById('P1_Score');
 const spanPlayer2Score = document.getElementById('P2_Score');
 const spanTurn = document.getElementById('turn');
+const isChallenge = window.localStorage.getItem('isChallenge')
 
 let turn = false;
 let playersScores = [0, 0];
@@ -223,10 +224,19 @@ const updateTime = () => {
   return currentTime + 1;
 };
 
+const checkChallenge = (currentTime) =>{
+if (isChallenge == 'true' && currentTime === 45){
+  alert(`${localStorage['player1Name']} you couldn't complete the challenge in time, try again!`);
+  window.location.href = 'https://memorygameufs.netlify.app';
+}
+
+} 
+
 // Função principal que inicia o timer
 const startTimer = () => {
   setInterval(() => {
-    updateTime();
+    const currentTime = updateTime();
+    checkChallenge(currentTime);
   }, 1000);
 };
 
