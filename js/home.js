@@ -1,9 +1,10 @@
 let isMultiplayer = false;
 const form = document.getElementById('myform');
 
+
 document.getElementById('btn1').onclick = function() {
   //remove a ocultação do texto e input do player 1, esconde novamente o texto e input do player 2 caso a opção multiplayer tenha sido
-  //selecionada anteriormente, atribui 'false' ao isMultiplayer para definir o jogo como singleplayer
+  //selecionada anteriormente, atribui 'false' ao isMultiplayer para definir o jogo como singleplayer   
   document.getElementById('P1_txt').hidden = false
   document.getElementById('P1_name').hidden = false
   document.getElementById('P2_txt').hidden = true
@@ -11,6 +12,7 @@ document.getElementById('btn1').onclick = function() {
   document.getElementById('play').hidden = false
   document.getElementById('myform').style.blockSize = '250px'
   document.getElementById('invalid_name').hidden = true
+  document.getElementById('chMode').hidden = false
   isMultiplayer = false;
 }
 document.getElementById('btn2').onclick = function() {
@@ -22,6 +24,7 @@ document.getElementById('btn2').onclick = function() {
   document.getElementById('play').hidden = false
   document.getElementById('myform').style.blockSize = '300px'
   document.getElementById('invalid_name').hidden = true   
+  document.getElementById('chMode').hidden = true
   isMultiplayer = true;
 }
 document.getElementById('btn3').onclick = function () {
@@ -32,7 +35,7 @@ document.getElementById('play').onclick = function () {
   //armazena o nome do P1 e P2
   localStorage['player1Name'] = document.getElementById('P1_name').value;
   localStorage['player2Name'] = document.getElementById('P2_name').value;
-
+  
   //verifica os seguintes casos: jogo multiplayer e ambos os nomes válidos(menor do que 3 caracteres), jogo singleplayer e o nome do P1
   //válido. Caso algum dos dois seja verdadeiro 'Name' recebe o valor de 'true'.
   if (isMultiplayer && (document.getElementById('P1_name').value.length <3 || document.getElementById('P2_name').value.length <3)){
@@ -50,5 +53,3 @@ document.getElementById('play').onclick = function () {
   else if (!isMultiplayer && document.getElementById('invalid_name').hidden)
     window.location = "/pages/game.html";
 }
-
-
