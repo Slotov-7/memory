@@ -27,14 +27,15 @@ document.getElementById('btn2').onclick = function () {
   document.getElementById('chMode').hidden = true
   isMultiplayer = true;
 }
+//redireciona para a pagina de seleção de tema
 document.getElementById('btn3').onclick = function () {
-  //redireciona para a pagina de seleção de tema
   window.location = "/pages/theme.html";
 }
+//ativa a função onTap com o jogo challenge mode desativado
 document.getElementById('play').onclick = function () {
   onTap();
 }
-
+// atribui true ao challenge mode e ativ a função onTap
 document.getElementById('chMode').onclick = function () {
  window.localStorage.setItem('isChallenge', true);
  onTap();

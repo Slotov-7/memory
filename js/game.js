@@ -86,11 +86,13 @@ const multiplayerResult = (playersWithScore) => {
   } else {
     alert(`Congratulations! ${winner.name} won with ${winner.score} points!! Your time was ${timer.innerHTML}`);
   }
+  window.location.href = 'https://memorygameufs.netlify.app';
 };
 
 // Função para exibir o resultado para o modo single player
 const singleplayerResult = (playersName) => {
   alert(`Congratulations, ${playersName[0]}! Your time was ${timer.innerHTML}s`);
+  window.location.href = 'https://memorygameufs.netlify.app';
 };
 
 // Função principal para verificar se o jogo terminou
@@ -224,6 +226,7 @@ const updateTime = () => {
   return currentTime + 1;
 };
 
+//verifica se isChallenge é verdadeiro(challenge mode ativo), se o tempo chegar a 45 segundos o jogo acaba e volta para a tela inicial
 const checkChallenge = (currentTime) =>{
 if (isChallenge == 'true' && currentTime === 45){
   alert(`${localStorage['player1Name']} you couldn't complete the challenge in time, try again!`);
@@ -232,7 +235,8 @@ if (isChallenge == 'true' && currentTime === 45){
 
 } 
 
-// Função principal que inicia o timer
+// Função principal que inicia o timer, usa checkChallenge para verificar se o tempo já está em 45 segundos caso o challenge mode
+//esteja ativo
 const startTimer = () => {
   setInterval(() => {
     const currentTime = updateTime();
