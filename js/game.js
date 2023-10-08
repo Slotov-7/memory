@@ -81,18 +81,23 @@ const getScore = (playersName) => playersScores
 const multiplayerResult = (playersWithScore) => {
   const [winner, loser] = playersWithScore;
 
-  if (winner.score === loser.score) {
-    alert(`It's a tie! Both ${winner.name} and ${loser.name} scored ${winner.score} points!!`);
-  } else {
-    alert(`Congratulations! ${winner.name} won with ${winner.score} points!! Your time was ${timer.innerHTML}`);
-  }
-  window.location.href = 'https://memorygameufs.netlify.app';
+  setTimeout(() => {
+    if (winner.score === loser.score) {
+      alert(`It's a tie! Both ${winner.name} and ${loser.name} scored ${winner.score} points!!`);
+    } else {
+      alert(`Congratulations! ${winner.name} won with ${winner.score} points!! Your time was ${timer.innerHTML}`);
+    }
+    window.location.href = 'https://memorygameufs.netlify.app';
+    }, 1000);
+  
 };
 
 // Função para exibir o resultado para o modo single player
 const singleplayerResult = (playersName) => {
-  alert(`Congratulations, ${playersName[0]}! Your time was ${timer.innerHTML}s`);
+  setTimeout(() => {
+    alert(`Congratulations, ${playersName[0]}! Your time was ${timer.innerHTML}s`);
   window.location.href = 'https://memorygameufs.netlify.app';
+    }, 1000);
 };
 
 // Função principal para verificar se o jogo terminou
