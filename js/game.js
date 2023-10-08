@@ -175,8 +175,11 @@ const checkCards = (firstCard, secondCard) => {
   }
 };
 
+let canClick = true; // Variável para controlar se o usuário pode realizar o click
+
 // Função para revelar uma carta quando o houver um click nela
 const revealCard = (event) => {
+  if (!canClick) return; 
   const target = event.target;
   if (target.parentNode.className.includes('reveal-card')) {
     return;
@@ -189,6 +192,10 @@ const revealCard = (event) => {
     target.parentNode.classList.add('reveal-card');
     secondCard = target.parentNode;
     [firstCard, secondCard] = checkCards(firstCard, secondCard);
+    canClick = false; 
+      setTimeout(() => {
+        canClick = true; 
+      }, 300);
   }
 }
 
@@ -232,13 +239,13 @@ const updateTime = () => {
 };
 
 //verifica se isChallenge é verdadeiro(challenge mode ativo), se o tempo chegar a 45 segundos o jogo acaba e volta para a tela inicial
-const checkChallenge = (currentTime) =>{
-if (isChallenge == 'true' && currentTime === 45){
-  alert(`${localStorage['player1Name']} you couldn't complete the challenge in time, try again!`);
-  window.location.href = 'https://memorygameufs.netlify.app';
-}
+const checkChallenge = (currentTime) => {
+  if (isChallenge == 'true' && currentTime === 45) {
+    alert(`${localStorage['player1Name']} you couldn't complete the challenge in time, try again!`);
+    window.location.href = 'https://memorygameufs.netlify.app';
+  }
 
-} 
+}
 
 // Função principal que inicia o timer, usa checkChallenge para verificar se o tempo já está em 45 segundos caso o challenge mode
 //esteja ativo
@@ -258,10 +265,12 @@ window.onload = () => {
     document.getElementById('P2_Name').innerText += " " + localStorage['player2Name'];
 
     // 50% de chances de ser a vez de cada jogador
-    turn = (Math.random() < 0.5);
+    if (Math.random() < 0.5) {
+      changeTurn();
+    }
   }
 
   spanPlayer.innerHTML = localStorage.getItem('player');
-  setTimeout(function () { startTimer(); }, 500),
-    loadGame();
+  setTimeout(function () { startTimer(); }, 500);
+  loadGame();
 }
