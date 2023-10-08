@@ -253,10 +253,12 @@ window.onload = () => {
     document.getElementById('P2_Name').innerText += " " + localStorage['player2Name'];
 
     // 50% de chances de ser a vez de cada jogador
-    turn = (Math.random() < 0.5);
+    if (Math.random() < 0.5) {
+      changeTurn();
+    }
   }
 
   spanPlayer.innerHTML = localStorage.getItem('player');
-  setTimeout(function () { startTimer(); }, 500),
-    loadGame();
+  setTimeout(function () { startTimer(); }, 500);
+  loadGame();
 }
